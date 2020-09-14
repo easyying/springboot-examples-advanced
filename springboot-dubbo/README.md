@@ -1,7 +1,7 @@
 #springboot-dubbo配置过程
 注：参考：https://github.com/Snailclimb/springboot-guide
 参考优秀博主guide哥一步步搭建完成，十分感谢
-
+先启动Zookeeper，再生产者工程，最后启动消费者工程
 
 ##1.步骤
 
@@ -9,9 +9,12 @@
 2）实现服务接口 dubbo-interface
 3）实现服务提供者 dubbo-provider
 4）实现服务消费者 dubbo-consumer
-5）查看zk节点：
+5）测试
+6）查看zk节点：
 zk客户端查看节点； 
 或者去一个可视化平台去查看（监控服务中心搭建）
+
+7)实现不同的消费者
 
 ##2.搭建zk环境
 参考自己的笔记
@@ -30,6 +33,8 @@ zk客户端查看节点；
 服务提供者启动类编写：注意dubbo相关的注解：@EnableDubboConfiguration
 启动启动类试一下
 
+@Service（暴露服务）
+
 ##5.实现服务消费者 dubbo-consumer
 创建dubbo-consumer模块;（当然实际项目中，我们的消费者和生产者肯定不会在一个项目中的，我们只需引用api模块的pom就行了）
 加入 dubbo 、zookeeper以及接口的相关依赖 jar 包；
@@ -38,10 +43,20 @@ zk客户端查看节点；
 服务消费者启动类编写
 测试效果:controller: http://localhost:8330/hello
 
-##6.查看zk节点
+@reference（引用服务）
+
+##6.测试
+1）方法一：controller
+2）方法二：test
+
+
+##7.查看zk节点
 1）zk客户端查看节点
 需要启动zk客户端连接zk服务端
 查看zk节点的变化：https://blog.csdn.net/qq_28336067/article/details/98084393
 2）监控服务中心搭建 监控dubbo的生产者提供的服务和消费者的情况
 https://www.cnblogs.com/mingxiaoyue/p/9194431.html
+
+##8.实现不同的消费者
+在这个里面通过不同的dubbo端口号去实现
 
